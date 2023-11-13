@@ -74,7 +74,13 @@ export class CheckoutComponent implements OnInit {
 
   deleteItem(deletedCartItem: CartItem) {
     this.items = this.items.filter(item => {
-      return item.id !== deletedCartItem.id; 
+      if (item.id === deletedCartItem.id) {
+        this.totalItems -= deletedCartItem.count;
+        this.total -= deletedCartItem.count * deletedCartItem.price;
+        return false;
+      } else {
+        return item.id !== deletedCartItem.id; 
+      }
     });
 
     //TODO Send delete item event to summary
