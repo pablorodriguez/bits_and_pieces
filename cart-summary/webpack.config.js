@@ -12,10 +12,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      svelte: path.resolve("node_modules", "svelte"),
+      svelte: path.resolve("node_modules", "svelte/src/runtime"),
     },
     extensions: [".mjs", ".js", ".svelte"],
     mainFields: ["svelte", "browser", "module", "main"],
+    conditionNames: ["svelte", "browser", "import"]
   },
   output: {
     path: __dirname + "/public",
@@ -54,7 +55,7 @@ module.exports = {
   mode,
   plugins: [
     new ModuleFederationPlugin({
-      name: "cart-summary",
+      name: "cartSummary",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
