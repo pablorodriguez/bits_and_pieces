@@ -7,7 +7,7 @@ import { CartItem } from '../models/cart-item';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent implements OnInit, OnChanges {
+export class CheckoutComponent implements OnInit {
   total: number = 0;
   totalItems: number = 0;
   items: CartItem[] = [
@@ -60,10 +60,6 @@ export class CheckoutComponent implements OnInit, OnChanges {
     }, 0);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
   buy(): void {
     //TODO
   }
@@ -85,17 +81,17 @@ export class CheckoutComponent implements OnInit, OnChanges {
   }
 
   incrementCount(updatedItem: CartItem) {
-    this.items = this.items.map(item => {
-      if (item.id === updatedItem.id)
-        item.count++;
-
-      return item;
-    });
+    updatedItem.count++;
+    this.totalItems++;
+    this.total += updatedItem.price;
   }
 
   decrementCount(item: CartItem) {
-    if (item.count > 0)
+    if (item.count > 0) {
       item.count--;
+      this.totalItems--;
+      this.total -= item.price;
+    }
 
     if (item.count === 0) {
       this.deleteItem(item);
