@@ -56,5 +56,8 @@ export class CheckoutComponent implements OnInit {
     this.total = 0;
   }
 
+  deleteItem(product:any ) {
+    console.log(product);
+  }
 }
 

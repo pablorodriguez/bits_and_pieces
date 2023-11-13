@@ -38,3 +38,10 @@
     height: 35px;
     font-size: medium;
 }
+
+.list-column span {
+    margin-left: 10px;
+}
+.delete-icon {
+    cursor: pointer;
+}
