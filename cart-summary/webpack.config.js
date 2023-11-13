@@ -21,7 +21,7 @@ module.exports = {
     path: __dirname + "/public",
     filename: "[name].js",
     chunkFilename: "[name].[id].js",
-    publicPath: "http://localhost:8080/",
+    publicPath: "http://localhost:4201/",
   },
   module: {
     rules: [
@@ -49,7 +49,7 @@ module.exports = {
     ],
   },
   devServer: {
-    port: 8080,
+    port: 4201,
   },
   mode,
   plugins: [

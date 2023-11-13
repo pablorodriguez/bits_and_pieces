@@ -9,7 +9,7 @@
       if(!categories[item.category]){
         categories[item.category] = 0;
       }
-      categories[item.category] += item.value;
+      categories[item.category] += item.price;
     });
   }
   let addToCartHandler = (event) =>{
@@ -31,14 +31,19 @@
 <div class="container">
       <p class="d-inline-flex gap-1">
           <i class="bi bi-cart"></i>Cart ({count})
-          <a class="btn btn-primary" data-bs-toggle="collapse" href="#cartSummary" role="button" aria-expanded="false" aria-controls="cartSummary">
-              Show Summary
-          </a>
       </p>
+      <a class="btn btn-link" data-bs-toggle="collapse" href="#cartSummary" role="button" aria-expanded="false" aria-controls="cartSummary">
+        Show Summary
+    </a>
       <div class="collapse" id="cartSummary">
           <div class="card card-body">
-            {#each Object.entries(categories) as [key, value], i}
+            {#if Object.entries(categories) == 0}
+              <p>Nothing in your cart</p>
+            {/if}
+            {#each Object.entries(categories).sort() as [key, value], i}
+            <div>
             {key} - ${value}
+            </div>
             {/each}
           </div>
       </div>
