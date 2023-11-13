@@ -29,11 +29,19 @@
 }
 
 .footer {
+    display:flex;
+    justify-content: end;
     margin-top: 1rem;
 }
 
 .buttons {
-    width: 100px;
     height: 35px;
     font-size: medium;
+}
+
+.list-column span {
+    margin-left: 10px;
+}
+.delete-icon {
+    cursor: pointer;
 }
