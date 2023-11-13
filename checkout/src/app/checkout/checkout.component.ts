@@ -46,5 +46,15 @@ export class CheckoutComponent implements OnInit {
     this.totalItems = this.products.length;
   }
 
+  buy(): void {
+    //TODO
+  }
+
+  cleanCart() {
+    this.products = [];
+    this.totalItems = 0;
+    this.total = 0;
+  }
+
 }
 
