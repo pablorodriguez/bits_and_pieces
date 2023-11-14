@@ -74,7 +74,8 @@
               "browserTarget": "checkout:build:production"
             },
             "development": {
-              "browserTarget": "checkout:build:development"
+              "browserTarget": "checkout:build:development",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"

@@ -8,6 +8,9 @@ module.exports = {
     chunkFilename: "[name].[id].js",
     publicPath: "http://localhost:4200/",
   },
+  optimization: {
+    runtimeChunk: false,
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'checkout',
