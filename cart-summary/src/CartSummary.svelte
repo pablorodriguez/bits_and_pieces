@@ -14,7 +14,17 @@
   }
   let addToCartHandler = (event) =>{
     items.push(event.detail);
-    
+
+    count = items.length;
+    updateCategories();
+  }
+
+  let removeFromCartHandler = (event) => {
+    console.log(event.detail);
+    console.log(items);
+    const newItems = items.filter((prd) => {return prd.id != event.detail.id});
+    items = newItems;
+    console.log("items", items);
     count = items.length;
     updateCategories();
   }
@@ -26,7 +36,9 @@
   }
 
   window.addEventListener('addToCart', addToCartHandler);
+  window.addEventListener('removeFromCart', removeFromCartHandler);
   window.addEventListener('clearCart', clearCartHandler);
+
 </script>
 <div class="container">
       <p class="d-inline-flex gap-1">

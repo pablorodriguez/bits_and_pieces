@@ -14,24 +14,6 @@ function productList () {
         checked: false,
         id: 2
       }, {
-        name: "Mouse",
-        category: "electronic",
-        price: 20.00,
-        checked: false,
-        id: 3
-      }, {
-        name: "Keyboard",
-        category: "electronic",
-        price: 20.00,
-        checked: false,
-        id: 4
-      }, {
-        name: "Headphones",
-        category: "electronic",
-        price: 20.00,
-        checked: false,
-        id: 5
-      }, {
         name: "Speakers",
         category: "electronic",
         price: 20.00,
@@ -44,28 +26,10 @@ function productList () {
         checked: false,
         id: 7
       }, {
-        name: "Shirt",
-        category: "clothing",
-        price: 20.00,
-        checked: false,
-        id: 8
-      }, {
-        name: "Pants",
-        category: "clothing",
-        price: 20.00,
-        checked: false,
-        id: 9
-      }, {
-        name: "Hat",
-        category: "clothing",
-        price: 20.00,
-        checked: false,
-        id: 10
-      }, {
         name: "Socks",
         category: "clothing",
         price: 20.00,
-        checked: true,
+        checked: false,
         id: 11
       }
       ];
@@ -76,14 +40,16 @@ function productList () {
       let newProducts = [...products];
       newProducts[index]['checked'] = !newProducts[index]['checked']
       setProducts(newProducts);
+      let prd = products[index]
+      window.dispatchEvent(new CustomEvent((prd['checked'] ? "addToCart" : "removeFromCart"), { detail: prd }))
     };
 
     const productSelected = () => {
-      console.log(products.filter((prd) => {return prd.checked}))
+      const prds = products.filter((prd) => {return prd.checked})
+      prds.each((prd) => window.dispatchEvent(new CustomEvent("addToCart", { detail: prd })))
     }
 
     const handleClickBuy = () => {
-
     }
 
     return (
@@ -105,7 +71,6 @@ function productList () {
                 )
               })}
             </div>
-            <button type="button" onClick={productSelected}>Buy</button>
         </div>
       );
 };
