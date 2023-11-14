@@ -9,7 +9,7 @@ export default () => {
     });
 
      return (
-        <div className="test" style="">
+        <div className="test">
             <div ref={ref}></div>;
         </div>
      )
