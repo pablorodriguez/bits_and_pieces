@@ -55,10 +55,10 @@ function productList () {
     return (
         <div id="product-list" className="container mx-auto font-sans text-base">
             <h1>Product List</h1>
-            <div className="mt-10 text-3xl mx-auto max-w-6xl flex flex-col space-y-4">
+            <div className="border-3 p-4 bg-stone-300 rounded mt-10 text-3xl mx-auto max-w-6xl flex flex-col space-y-4">
               {products.map((product, index) => {
                 return (
-                  <div key={product.id} className="border-2 border-blue-500 shadow-md rounded p-3 grid grid-cols-3 gap-2">
+                  <div key={product.id} className="border-2 border-blue-500 shadow-md rounded p-3 bg-white grid grid-cols-3 gap-2">
                     <div className='col-span-2'>
                         <div className='text-lg'>Name: {product.name}</div>
                         <div className='text-base'>Category: {product.category}</div>
