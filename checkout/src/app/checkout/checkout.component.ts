@@ -80,6 +80,9 @@ export class CheckoutComponent implements OnInit {
         count: 1,
       });
     }
+
+    //TODO create function for recalculating totals and use it everywhere that is necessary
+
   }
 
   buy(): void {
@@ -125,4 +128,5 @@ export class CheckoutComponent implements OnInit {
       this.deleteItem(item);
     }
   }
+
 }
