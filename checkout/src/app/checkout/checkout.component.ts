@@ -5,79 +5,80 @@ import { CartItem } from '../models/cart-item';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
   total: number = 0;
   totalItems: number = 0;
   items: CartItem[] = [
     {
-      "id": 0,
-      "name": "Laptop",
-      "price": 999.99,
-      "category": "Electronics",
-      "count": 1,
+      id: 0,
+      name: 'Laptop',
+      price: 999.99,
+      category: 'Electronics',
+      count: 1,
     },
     {
-      "id": 1,
-      "name": "T-shirt",
-      "price": 19.99,
-      "category": "Apparel",
-      "count": 1,
+      id: 1,
+      name: 'T-shirt',
+      price: 19.99,
+      category: 'Apparel',
+      count: 1,
     },
     {
-      "id": 2,
-      "name": "Headphones",
-      "price": 79.99,
-      "category": "Electronics",
-      "count": 1,
+      id: 2,
+      name: 'Headphones',
+      price: 79.99,
+      category: 'Electronics',
+      count: 1,
     },
     {
-      "id": 3,
-      "name": "Running Shoes",
-      "price": 49.99,
-      "category": "Footwear",
-      "count": 1,
+      id: 3,
+      name: 'Running Shoes',
+      price: 49.99,
+      category: 'Footwear',
+      count: 1,
     },
     {
-      "id": 4,
-      "name": "Backpack",
-      "price": 39.99,
-      "category": "Accessories",
-      "count": 1,
-    }
+      id: 4,
+      name: 'Backpack',
+      price: 39.99,
+      category: 'Accessories',
+      count: 1,
+    },
   ];
-  
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit(): void {
     //TODO set up event listener for add item event
-    window.addEventListener('addToCart', event => {this.addItemHandler(event)});
-    this.items.forEach(product => {
+    window.addEventListener('addToCart', (event) => {
+      this.addItemHandler(event);
+    });
+    this.items.forEach((product) => {
       this.total = this.total + product.price;
     });
     this.totalItems = this.items.reduce((totalItems, item) => {
-      return totalItems += item.count
+      return (totalItems += item.count);
     }, 0);
   }
 
   addItemHandler(event: any) {
-    const itemIndex = this.items.findIndex(item => item.id === event.detail.id);
+    const itemIndex = this.items.findIndex(
+      (item) => item.id === event.detail.id
+    );
     if (itemIndex != -1) {
-      let tempArray = [...this.items];
+      const tempArray = [...this.items];
       tempArray[itemIndex] = {
-          ...this.items[itemIndex],
-          count: this.items[itemIndex].count + 1
-        };
+        ...this.items[itemIndex],
+        count: this.items[itemIndex].count + 1,
+      };
       this.items = tempArray;
     } else {
-      this.items = [
-        ...this.items,
-        {
-          ...event.detail,
-          count: 1
-        }
-      ]
+      this.items.push({
+        ...event.detail,
+        count: 1,
+      });
     }
   }
 
@@ -94,13 +95,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   deleteItem(deletedCartItem: CartItem) {
-    this.items = this.items.filter(item => {
+    this.items = this.items.filter((item) => {
       if (item.id === deletedCartItem.id) {
         this.totalItems -= deletedCartItem.count;
         this.total -= deletedCartItem.count * deletedCartItem.price;
         return false;
       } else {
-        return item.id !== deletedCartItem.id; 
+        return item.id !== deletedCartItem.id;
       }
     });
 
@@ -125,4 +126,3 @@ export class CheckoutComponent implements OnInit {
     }
   }
 }
-
