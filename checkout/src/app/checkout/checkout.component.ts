@@ -51,16 +51,10 @@ export class CheckoutComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    //TODO set up event listener for add item event
     window.addEventListener('addToCart', (event) => {
       this.addItemHandler(event);
     });
-    this.items.forEach((product) => {
-      this.total = this.total + product.price;
-    });
-    this.totalItems = this.items.reduce((totalItems, item) => {
-      return (totalItems += item.count);
-    }, 0);
+    this.calculateTotals();
   }
 
   addItemHandler(event: any) {
@@ -81,7 +75,7 @@ export class CheckoutComponent implements OnInit {
       });
     }
 
-    //TODO create function for recalculating totals and use it everywhere that is necessary
+    this.calculateTotals();
 
   }
 
@@ -100,21 +94,19 @@ export class CheckoutComponent implements OnInit {
   deleteItem(deletedCartItem: CartItem) {
     this.items = this.items.filter((item) => {
       if (item.id === deletedCartItem.id) {
-        this.totalItems -= deletedCartItem.count;
-        this.total -= deletedCartItem.count * deletedCartItem.price;
         return false;
       } else {
         return item.id !== deletedCartItem.id;
       }
     });
 
+    this.calculateTotals();
     //TODO Send delete item event to summary
   }
 
   incrementCount(updatedItem: CartItem) {
     updatedItem.count++;
-    this.totalItems++;
-    this.total += updatedItem.price;
+    this.calculateTotals();
   }
 
   decrementCount(item: CartItem) {
@@ -124,9 +116,21 @@ export class CheckoutComponent implements OnInit {
       this.total -= item.price;
     }
 
-    if (item.count === 0) {
+    if (item.count === 0)
       this.deleteItem(item);
-    }
+
+    this.calculateTotals();
   }
 
+  calculateTotals() {
+    this.total = 0;
+    this.items.forEach((item) => {
+      this.total = this.total + (item.price * item.count);
+    });
+
+    this.totalItems = 0;
+    this.totalItems = this.items.reduce((totalItems, item) => {
+      return (totalItems += item.count);
+    }, 0);
+  }
 }
