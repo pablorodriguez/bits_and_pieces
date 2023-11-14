@@ -40,7 +40,7 @@
   window.addEventListener('clearCart', clearCartHandler);
 
 </script>
-<div class="container">
+<div class="container mb-5">
       <p class="d-inline-flex gap-1">
           <i class="bi bi-cart"></i>Cart ({count})
       </p>
