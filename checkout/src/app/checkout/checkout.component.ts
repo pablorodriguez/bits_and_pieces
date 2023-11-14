@@ -11,41 +11,7 @@ export class CheckoutComponent implements OnInit {
   total: number = 0;
   totalItems: number = 0;
   items: CartItem[] = [
-    {
-      id: 0,
-      name: 'Laptop',
-      price: 999.99,
-      category: 'Electronics',
-      count: 1,
-    },
-    {
-      id: 1,
-      name: 'T-shirt',
-      price: 19.99,
-      category: 'Apparel',
-      count: 1,
-    },
-    {
-      id: 2,
-      name: 'Headphones',
-      price: 79.99,
-      category: 'Electronics',
-      count: 1,
-    },
-    {
-      id: 3,
-      name: 'Running Shoes',
-      price: 49.99,
-      category: 'Footwear',
-      count: 1,
-    },
-    {
-      id: 4,
-      name: 'Backpack',
-      price: 39.99,
-      category: 'Accessories',
-      count: 1,
-    },
+   
   ];
 
   constructor() {}
@@ -53,6 +19,16 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('addToCart', (event) => {
       this.addItemHandler(event);
+    });
+
+    window.addEventListener('removeFromCart', (event) => {
+      this.removeItemHandler(event);
+    });
+
+    window.addEventListener('clearCart', (event) => {
+      this.items = [];
+      this.totalItems = 0;
+      this.total = 0;
     });
     this.calculateTotals();
   }
@@ -76,7 +52,17 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.calculateTotals();
+  }
 
+  removeItemHandler(event: any) {
+    const itemIndex = this.items.findIndex(
+      (item) => item.id === event.detail.id
+    );
+
+    if (itemIndex != -1) {
+      this.items = this.items.filter(item => item.id !== event.detail.id);
+    }
+    this.calculateTotals();
   }
 
   buy(): void {
@@ -84,48 +70,48 @@ export class CheckoutComponent implements OnInit {
   }
 
   cleanCart() {
-    this.items = [];
-    this.totalItems = 0;
-    this.total = 0;
+
+    window.dispatchEvent(new CustomEvent('clearCart'))
 
     //TODO Send clear cart event
   }
 
   deleteItem(deletedCartItem: CartItem) {
-    this.items = this.items.filter((item) => {
-      if (item.id === deletedCartItem.id) {
-        return false;
-      } else {
-        return item.id !== deletedCartItem.id;
-      }
-    });
+    // this.items = this.items.filter((item) => {
+    //   if (item.id === deletedCartItem.id) {
+    //     return false;
+    //   } else {
+    //     return item.id !== deletedCartItem.id;
+    //   }
+    // });
 
-    this.calculateTotals();
+    window.dispatchEvent(new CustomEvent('removeFromCart', {detail: deletedCartItem}))
     //TODO Send delete item event to summary
   }
 
-  incrementCount(updatedItem: CartItem) {
-    updatedItem.count++;
-    this.calculateTotals();
-  }
+  // incrementCount(updatedItem: CartItem) {
+  //   // updatedItem.count++;
+  //   // this.calculateTotals();
+  //   window.dispatchEvent(new CustomEvent('addToCart', {detail: updatedItem}))
+  // }
 
-  decrementCount(item: CartItem) {
-    if (item.count > 0) {
-      item.count--;
-      this.totalItems--;
-      this.total -= item.price;
-    }
+  // decrementCount(item: CartItem) {
+  //   window.dispatchEvent(new CustomEvent('removeFromCart', {detail: item}))
+  //   // if (item.count > 0) {
+  //   //   item.count--;
+  //   //   this.totalItems--;
+  //   //   this.total -= item.price;
+  //   // }
 
-    if (item.count === 0)
-      this.deleteItem(item);
+  //   // if (item.count === 0) this.deleteItem(item);
 
-    this.calculateTotals();
-  }
+  //   // this.calculateTotals();
+  // }
 
   calculateTotals() {
     this.total = 0;
     this.items.forEach((item) => {
-      this.total = this.total + (item.price * item.count);
+      this.total = this.total + item.price * item.count;
     });
 
     this.totalItems = 0;
