@@ -4,12 +4,14 @@ import SummaryApp from '../components/SummaryApp';
 import CheckoutApp from '../components/CheckoutApp';
 import 'zone.js';
 
+import "./index.scss";
+
 export default() => {
     return (
-      <div>
+      <div className='container-app'>
         <ProductApp></ProductApp>
-        <CheckoutApp></CheckoutApp>
         <SummaryApp></SummaryApp>
+        <CheckoutApp></CheckoutApp>
       </div>
     )
 }

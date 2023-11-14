@@ -1,0 +1,14 @@
+.container-app {
+  margin: 0px auto;
+  overflow: hidden;
+  width: 60%;
+  
+  .item {
+    width: 45%;
+    float: left;
+
+    &.summary {
+      margin-top: 80px;
+    }
+  }
+}

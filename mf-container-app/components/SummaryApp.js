@@ -8,5 +8,5 @@ export default () => {
         mount(ref.current);
     });
 
-     return <div ref={ref}></div>;
+     return <div className="item summary" ref={ref}></div>;
 };

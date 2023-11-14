@@ -9,7 +9,7 @@ export default () => {
     }, []);
 
      return (
-        <div>
+        <div className='item'>
             <app-checkout-root ref={ref}></app-checkout-root>
         </div>
      )

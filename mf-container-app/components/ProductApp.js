@@ -9,9 +9,7 @@ export default () => {
     });
 
      return (
-        <div className="test">
-            <div ref={ref}></div>;
-        </div>
+        <div className="item" ref={ref}></div>
      )
 
 };
