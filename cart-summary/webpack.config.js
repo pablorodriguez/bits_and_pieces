@@ -55,11 +55,11 @@ module.exports = {
   mode,
   plugins: [
     new ModuleFederationPlugin({
-      name: "cartSummary",
+      name: "summary",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./cart-summary": "./src/CartSummary.svelte",
+        "./summaryApp": "./src/bootstrap",
       },
       shared: require("./package.json").dependencies,
     }),
