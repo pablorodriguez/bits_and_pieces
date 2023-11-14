@@ -12,35 +12,35 @@ export class CheckoutComponent implements OnInit {
   totalItems: number = 0;
   items: CartItem[] = [
     {
-      "id": "0",
+      "id": 0,
       "name": "Laptop",
       "price": 999.99,
       "category": "Electronics",
       "count": 1,
     },
     {
-      "id": "1",
+      "id": 1,
       "name": "T-shirt",
       "price": 19.99,
       "category": "Apparel",
       "count": 1,
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Headphones",
       "price": 79.99,
       "category": "Electronics",
       "count": 1,
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Running Shoes",
       "price": 49.99,
       "category": "Footwear",
       "count": 1,
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Backpack",
       "price": 39.99,
       "category": "Accessories",
@@ -52,12 +52,33 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     //TODO set up event listener for add item event
+    window.addEventListener('addToCart', event => {this.addItemHandler(event)});
     this.items.forEach(product => {
       this.total = this.total + product.price;
     });
     this.totalItems = this.items.reduce((totalItems, item) => {
       return totalItems += item.count
     }, 0);
+  }
+
+  addItemHandler(event: any) {
+    const itemIndex = this.items.findIndex(item => item.id === event.detail.id);
+    if (itemIndex != -1) {
+      let tempArray = [...this.items];
+      tempArray[itemIndex] = {
+          ...this.items[itemIndex],
+          count: this.items[itemIndex].count + 1
+        };
+      this.items = tempArray;
+    } else {
+      this.items = [
+        ...this.items,
+        {
+          ...event.detail,
+          count: 1
+        }
+      ]
+    }
   }
 
   buy(): void {
