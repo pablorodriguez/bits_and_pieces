@@ -8,5 +8,5 @@ export default () => {
         mount();
     }, []);
 
-     return <app-root ref={ref}></app-root>;
+     return <app-checkout-root ref={ref}></app-checkout-root>;
 };

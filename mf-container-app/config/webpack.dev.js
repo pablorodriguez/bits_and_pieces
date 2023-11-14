@@ -19,7 +19,7 @@ const devConfig = {
       remotes: [
         { product: 'product@http://localhost:8081/remoteEntry.js'},
         { summary: 'summary@http://localhost:4201/remoteEntry.js'},
-        //{ checkout: 'checkout@http://localhost:4200/remoteEntry.js'}
+        { checkout: 'checkout@http://localhost:4200/remoteEntry.js'}
       ],
       shared: packageJson.dependencies,
     }),
