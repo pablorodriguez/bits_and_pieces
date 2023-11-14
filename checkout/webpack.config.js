@@ -13,7 +13,7 @@ module.exports = {
       name: 'checkout',
       filename: 'remoteEntry.js',
       exposes:{
-        './CheckoutMain': './src/app/app.module.ts',
+        './CheckoutApp': './src/bootstrap',
       },
       shared: {
         '@angular/core': {eager: true, singleton: true},
