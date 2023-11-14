@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 function productList () {
+
+
+
     const productsList = [{
         name: 'MacBook Pro',
         category: 'electronic',
@@ -49,8 +52,24 @@ function productList () {
       prds.each((prd) => window.dispatchEvent(new CustomEvent("addToCart", { detail: prd })))
     }
 
-    const handleClickBuy = () => {
-    }
+    window.addEventListener('removeFromCart', (event) => {
+      setProducts(products.map(product => {
+        return product.id === event.detail.id 
+        ? {
+            ...product,
+            checked: false 
+        } : product
+      }));
+    });
+  
+    window.addEventListener('clearCart', (event) => {
+      setProducts(products.map(product => {
+        return {
+          ...product,
+          checked:false
+        }
+      }));
+    });
 
     return (
         <div id="product-list" className="container mx-auto font-sans text-base">
