@@ -28,7 +28,7 @@
             <h6 class="my-0">{{ item.name }}</h6>
             <small class="text-muted">{{ item.category }}</small>
           </div>
-          <div class="list-column">
+          <div class="list-column" style="display: flex">
             <span class="text-muted">{{ item.price | currency }}</span>
             <!-- <span class="icon-btn" (click)="incrementCount(item)">
               <svg
@@ -65,7 +65,7 @@
                 />
               </svg>
             </span> -->
-            <span class="icon-btn" (click)="deleteItem(item)">
+            <span class="icon-btn" (click)="deleteItem(item)" style="margin-top: 4px;">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
