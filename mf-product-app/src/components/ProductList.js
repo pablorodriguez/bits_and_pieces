@@ -54,14 +54,14 @@ function productList () {
 
     window.addEventListener('removeFromCart', (event) => {
       setProducts(products.map(product => {
-        return product.id === event.detail.id 
+        return product.id === event.detail.id
         ? {
             ...product,
-            checked: false 
+            checked: false
         } : product
       }));
     });
-  
+
     window.addEventListener('clearCart', (event) => {
       setProducts(products.map(product => {
         return {
@@ -74,7 +74,7 @@ function productList () {
     return (
         <div id="product-list" className="container mx-auto font-sans text-base">
             <h1>Product List</h1>
-            <div className="border-3 p-4 bg-stone-300 rounded mt-10 text-3xl mx-auto max-w-6xl flex flex-col space-y-4">
+            <div className="border-3 p-4 bg-stone-300 border-red-500 rounded mt-10 text-3xl mx-auto max-w-6xl flex flex-col space-y-4">
               {products.map((product, index) => {
                 return (
                   <div key={product.id} className="border-2 border-blue-500 shadow-md rounded p-3 bg-white grid grid-cols-3 gap-2">
